@@ -27,7 +27,12 @@ class MyApp extends StatelessWidget {
           onSurface: Color(0xFF45ADA8),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF45ADA8),
+          backgroundColor: Color(0xFFF9F9F9),
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            color: Color(0xFF45ADA8),
+            fontSize: 20,
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:emprego_aqui_app/feature/home/page/home_page.dart';
 import 'package:emprego_aqui_app/feature/vagas/page/vagas_page.dart';
 import 'package:emprego_aqui_app/shared/app_bar_component/app_bar_component.dart';
+import 'package:emprego_aqui_app/shared/app_bar_component/app_bar_item.dart';
 import 'package:flutter/material.dart';
 
 class BasePage extends StatefulWidget {
@@ -11,9 +12,9 @@ class BasePage extends StatefulWidget {
 }
 
 class _BasePageState extends State<BasePage> {
-  final List<Widget> widgetOptions = [
-    const HomePage(),
-    const VagasPage(),
+  final List<AppBarItem> widgetOptions = [
+    AppBarItem(const HomePage(), 'Home'),
+    AppBarItem(const VagasPage(), 'Vagas'),
   ];
 
   int _currentIndex = 0;
@@ -23,11 +24,11 @@ class _BasePageState extends State<BasePage> {
     return Scaffold(
       appBar: AppBarComponent(
         AppBar(),
-        title: 'Home',
+        title: widgetOptions.elementAt(_currentIndex).title,
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
-        child: widgetOptions.elementAt(_currentIndex),
+        child: widgetOptions.elementAt(_currentIndex).widget,
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => setState(() {
@@ -41,7 +42,7 @@ class _BasePageState extends State<BasePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
-            label: 'List',
+            label: 'Vagas',
           ),
         ],
       ),
