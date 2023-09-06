@@ -1,4 +1,5 @@
 import 'package:emprego_aqui_app/feature/base/base_page.dart';
+import 'package:emprego_aqui_app/shared/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,8 +11,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const BasePage(),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
@@ -25,16 +26,24 @@ class MyApp extends StatelessWidget {
           onBackground: Color(0xFFF9F9F9),
           surface: Color(0xFFF2F2F2),
           onSurface: Color(0xFF45ADA8),
+          primaryContainer: Color(0xFFE1E1E1),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFF9F9F9),
+          backgroundColor: Color(0xFFE1E1E1),
           elevation: 0,
           titleTextStyle: TextStyle(
             color: Color(0xFF45ADA8),
             fontSize: 20,
           ),
         ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Color(0xFFE1E1E1),
+        ),
+        scaffoldBackgroundColor: const Color(0xFFE1E1E1),
       ),
+      routerDelegate: routes.routerDelegate,
+      routeInformationParser: routes.routeInformationParser,
+      routeInformationProvider: routes.routeInformationProvider,
     );
   }
 }
