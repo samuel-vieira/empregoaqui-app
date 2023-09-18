@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1010126939850",
+    "project_id": "emprego-aqui-api",
+    "storage_bucket": "emprego-aqui-api.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010126939850:android:1a3749792b47a4ccbc7633",
+        "android_client_info": {
+          "package_name": "com.example.emprego_aqui_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-M2ay4EDsNQuIdW6jqDtVu2o_nqU0LMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

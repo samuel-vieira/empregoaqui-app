@@ -1,9 +1,26 @@
-import 'package:emprego_aqui_app/feature/base/base_page.dart';
+import 'package:asp/asp.dart';
+import 'package:emprego_aqui_app/data/vagas/di/injection.dart';
+import 'package:emprego_aqui_app/domain/vagas/di/injection.dart';
+import 'package:emprego_aqui_app/firebase_options.dart';
+import 'package:emprego_aqui_app/services/db/firebase_injector.dart';
 import 'package:emprego_aqui_app/shared/routes/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-void main() {
-  runApp(const MyApp());
+GetIt getIt = GetIt.instance;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseInjector();
+  VagasInjector();
+  VagaDomainInjection();
+
+  runApp(const RxRoot(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

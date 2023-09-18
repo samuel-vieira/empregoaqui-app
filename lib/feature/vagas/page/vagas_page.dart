@@ -6,6 +6,11 @@ class VagasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const VagasListaWidget();
+    return const Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        VagasListaWidget(),
+      ],
+    );
   }
 }
