@@ -13,7 +13,7 @@ class GetVagasUseCase {
       List<Vaga> vagas = await _repository.fetchVagas();
       return Right(vagas);
     } catch (error) {
-      return Left(Exception("Erro ao buscar vagas"));
+      return Left(Exception("Erro ao buscar vagas: $error"));
     }
   }
 }

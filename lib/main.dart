@@ -31,33 +31,37 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: const ColorScheme(
-          brightness: Brightness.light,
-          primary: Color(0xFF45ADA8),
-          onPrimary: Color(0xFFF9F9F9),
-          secondary: Color(0xFF594F4F),
-          onSecondary: Color(0xFFF9F9F9),
-          error: Color(0xFFD73131),
-          onError: Color(0xFFF9F9F9),
-          background: Color(0xFFE1E1E1),
-          onBackground: Color(0xFFF9F9F9),
-          surface: Color(0xFFF2F2F2),
-          onSurface: Color(0xFF45ADA8),
-          primaryContainer: Color(0xFFE1E1E1),
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFFE1E1E1),
-          elevation: 0,
-          titleTextStyle: TextStyle(
-            color: Color(0xFF45ADA8),
-            fontSize: 20,
+          colorScheme: const ColorScheme(
+            brightness: Brightness.light,
+            primary: Color(0xFF45ADA8),
+            onPrimary: Color(0xFFF9F9F9),
+            secondary: Color(0xFF594F4F),
+            onSecondary: Color(0xFFF9F9F9),
+            error: Color(0xFFD73131),
+            onError: Color(0xFFF9F9F9),
+            background: Color(0xFFE1E1E1),
+            onBackground: Color(0xFFF9F9F9),
+            surface: Color(0xFFF2F2F2),
+            onSurface: Color(0xFF45ADA8),
+            primaryContainer: Color(0xFFE1E1E1),
           ),
-        ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color(0xFFE1E1E1),
-        ),
-        scaffoldBackgroundColor: const Color(0xFFE1E1E1),
-      ),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Color(0xFFE1E1E1),
+              elevation: 0,
+              titleTextStyle: TextStyle(
+                color: Color(0xFF45ADA8),
+                fontSize: 20,
+              ),
+              iconTheme: IconThemeData(
+                color: Color(0xFF45ADA8),
+              )),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Color(0xFFE1E1E1),
+          ),
+          scaffoldBackgroundColor: const Color(0xFFE1E1E1),
+          cardTheme: const CardTheme(
+            color: Color(0xFFF2F2F2),
+          )),
       routerDelegate: routes.routerDelegate,
       routeInformationParser: routes.routeInformationParser,
       routeInformationProvider: routes.routeInformationProvider,

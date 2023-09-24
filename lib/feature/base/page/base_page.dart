@@ -23,7 +23,6 @@ class _BasePageState extends State<BasePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarComponent(
-        AppBar(),
         title: widgetOptions.elementAt(_currentIndex).title,
       ),
       body: Padding(

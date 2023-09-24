@@ -13,10 +13,9 @@ class VagasRepositoryImpl implements VagasRepository {
   final VagasDataSource vagaDataSource;
   final VagaMapper mapper;
 
-  List<Vaga> vagas = [];
-
   @override
   Future<List<Vaga>> fetchVagas() async {
+    List<Vaga> vagas = [];
     List<VagaDTO> vagasDTO = await vagaDataSource.fetchVagas();
 
     for (VagaDTO vaga in vagasDTO) {

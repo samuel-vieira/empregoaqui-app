@@ -1,4 +1,7 @@
+import 'package:emprego_aqui_app/data/vagas/data_source/vagas_data_source.dart';
 import 'package:emprego_aqui_app/feature/vagas/widgets/vagas_lista_widget.dart';
+import 'package:emprego_aqui_app/feature/vagas/widgets/vagas_search_bar_widget.dart';
+import 'package:emprego_aqui_app/main.dart';
 import 'package:flutter/material.dart';
 
 class VagasPage extends StatelessWidget {
@@ -6,11 +9,24 @@ class VagasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        VagasListaWidget(),
-      ],
+    return ListView.builder(
+      itemCount: 1,
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        return const Column(
+          children: [
+            /*ElevatedButton(
+              onPressed: () => getIt<VagasDataSource>().createVaga(),
+              child: const Text("Create vaga"),
+            ),*/
+            VagasSearchBarWidget(),
+            SizedBox(
+              height: 20,
+            ),
+            VagasListaWidget(),
+          ],
+        );
+      },
     );
   }
 }

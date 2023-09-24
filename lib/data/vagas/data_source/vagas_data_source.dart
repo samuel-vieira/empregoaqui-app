@@ -1,5 +1,6 @@
 import 'package:emprego_aqui_app/data/vagas/dto/vaga_dto.dart';
 import 'package:emprego_aqui_app/services/db/firebase_service.dart';
+import 'package:emprego_aqui_app/shared/generate_uuid.dart';
 import 'package:flutter/material.dart';
 
 class VagasDataSource {
@@ -13,7 +14,7 @@ class VagasDataSource {
       final encodedVagas = await firebaseService.vagasRef.get();
 
       for (var doc in encodedVagas.docs) {
-        final vaga = VagaDTO.fromJson(doc);
+        final vaga = VagaDTO.fromFirestore(doc);
         vagasDTO.add(vaga);
       }
 
@@ -25,10 +26,29 @@ class VagasDataSource {
 
   Future createVaga() async {
     try {
-      final vaga = VagaDTO(nome: "Vaga 1 FB");
+      final vaga = VagaDTO(
+        nome: "Desenvolvedor Java",
+        nomeEmpresa: "Rec solutions",
+        sobreEmpresa:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        sobreVaga:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        requistos: [
+          "Java",
+          "Spring Boot",
+          "Postgres SQL",
+          "Git",
+        ],
+        modeloTrabalho: "Remoto",
+        salario: "18000",
+        tipoDeContrato: "PJ",
+      );
       final vaga1 = VagaDTO.toJson(vaga);
+
+      final uuid = UniqueId().generateUuid();
+
       firebaseService.vagasRef
-          .doc(vaga1['nome'])
+          .doc(uuid)
           .set(vaga1)
           .onError((error, _) => debugPrint("Erro ao adicionar vaga $error"));
     } catch (error) {

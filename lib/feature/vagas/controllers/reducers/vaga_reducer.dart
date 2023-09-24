@@ -20,6 +20,7 @@ class VagaReducer extends Reducer {
         debugPrint("Erro ao buscar vagas");
       },
       (right) {
+        vagasAtom.value.clear();
         vagasAtom.value.addAll(right);
       },
     );
