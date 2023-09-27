@@ -21,4 +21,16 @@ class CustomTextStyle {
     fontSize: 16,
     color: Color(0xff45ADA8),
   );
+
+  static const nomeLogin1 = TextStyle(
+    fontSize: 36,
+    color: Color(0xff45ADA8),
+    fontWeight: FontWeight.bold,
+  );
+
+  static const nomeLogin2 = TextStyle(
+    fontSize: 36,
+    color: Color(0xff594F4F),
+    fontWeight: FontWeight.bold,
+  );
 }

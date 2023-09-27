@@ -1,7 +1,5 @@
-import 'package:emprego_aqui_app/data/vagas/data_source/vagas_data_source.dart';
 import 'package:emprego_aqui_app/feature/vagas/widgets/vagas_lista_widget.dart';
 import 'package:emprego_aqui_app/feature/vagas/widgets/vagas_search_bar_widget.dart';
-import 'package:emprego_aqui_app/main.dart';
 import 'package:flutter/material.dart';
 
 class VagasPage extends StatelessWidget {
