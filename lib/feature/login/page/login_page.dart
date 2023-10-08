@@ -117,7 +117,6 @@ class LoginPage extends StatelessWidget {
         if (userAuth != null) {
           context.go('/');
           user.value = getIt<FirebaseService>().auth.currentUser;
-          debugPrint(user.value.toString());
         }
       });
     } catch (e) {

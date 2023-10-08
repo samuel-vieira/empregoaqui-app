@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 enum CardType {
   homeCard,
   vagaCard,
+  experienciaCard,
 }
 
 class CardComponent extends StatelessWidget {
@@ -24,6 +25,7 @@ class CardComponent extends StatelessWidget {
             Radius.circular(0),
           ),
         ),
+        padding: EdgeInsets.zero,
         width: double.maxFinite,
         height: setHeight(),
         child: child,
@@ -31,10 +33,11 @@ class CardComponent extends StatelessWidget {
     );
   }
 
-  double setHeight() {
+  double? setHeight() {
     return switch (type) {
       CardType.homeCard => 77,
       CardType.vagaCard => 100,
+      CardType.experienciaCard => null,
     };
   }
 }

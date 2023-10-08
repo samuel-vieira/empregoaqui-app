@@ -26,7 +26,7 @@ class VagaInfoWidget extends StatelessWidget {
                 ),
                 TextComponent(
                   text: vaga.tipoDeContrato,
-                  type: TextTypeComponent.paragrafo2,
+                  type: TextTypeComponent.paragrafo3,
                 ),
               ],
             ),
@@ -48,7 +48,7 @@ class VagaInfoWidget extends StatelessWidget {
                 ),
                 TextComponent(
                   text: vaga.modeloDeTrabalho,
-                  type: TextTypeComponent.paragrafo2,
+                  type: TextTypeComponent.paragrafo3,
                 ),
               ],
             ),
@@ -61,7 +61,7 @@ class VagaInfoWidget extends StatelessWidget {
                 ),
                 TextComponent(
                   text: vaga.salario,
-                  type: TextTypeComponent.paragrafo2,
+                  type: TextTypeComponent.paragrafo3,
                 ),
               ],
             ),

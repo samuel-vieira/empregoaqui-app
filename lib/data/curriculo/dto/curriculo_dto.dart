@@ -1,18 +1,21 @@
 class CurriculoDTO {
-  String nome;
-  DateTime dataNascimento;
-  List<String> experiencias;
-  List<String> competencias;
+  List<dynamic> experiencias;
+  List<dynamic> competencias;
 
   CurriculoDTO({
-    required this.nome,
     required this.competencias,
-    required this.dataNascimento,
     required this.experiencias,
   });
 
+  factory CurriculoDTO.fromFirestore(dynamic json) {
+    return CurriculoDTO(
+      competencias: json?['competencias'] ?? '',
+      experiencias: json?['experiencias'] ?? '',
+    );
+  }
+
   @override
   String toString() {
-    return 'nome: $nome, competencias: $competencias, dataNascimento: $dataNascimento, experiencias: $experiencias';
+    return 'competencias: $competencias, experiencias: $experiencias';
   }
 }

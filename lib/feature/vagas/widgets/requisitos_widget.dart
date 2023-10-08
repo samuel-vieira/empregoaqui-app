@@ -21,7 +21,7 @@ class RequisitosWidget extends StatelessWidget {
         for (String requisito in requisitos)
           TextComponent(
             text: '• $requisito',
-            type: TextTypeComponent.paragrafo2,
+            type: TextTypeComponent.paragrafo3,
           ),
       ],
     );

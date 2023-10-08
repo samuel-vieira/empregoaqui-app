@@ -20,7 +20,7 @@ class SobreVagaWidget extends StatelessWidget {
         ),
         TextComponent(
           text: sobreVaga,
-          type: TextTypeComponent.paragrafo2,
+          type: TextTypeComponent.paragrafo3,
         ),
       ],
     );

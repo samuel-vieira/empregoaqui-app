@@ -6,8 +6,10 @@ enum TextTypeComponent {
   tituloCard,
   paragrafo1,
   paragrafo2,
+  paragrafo3,
   nomeLogin1,
   nomeLogin2,
+  label,
 }
 
 class TextComponent extends StatelessWidget {
@@ -33,9 +35,11 @@ class TextComponent extends StatelessWidget {
       TextTypeComponent.titulo => CustomTextStyle.titulo,
       TextTypeComponent.paragrafo1 => CustomTextStyle.paragrafo1,
       TextTypeComponent.paragrafo2 => CustomTextStyle.paragrafo2,
+      TextTypeComponent.paragrafo3 => CustomTextStyle.paragrafo3,
       TextTypeComponent.tituloCard => CustomTextStyle.tituloCard,
       TextTypeComponent.nomeLogin1 => CustomTextStyle.nomeLogin1,
       TextTypeComponent.nomeLogin2 => CustomTextStyle.nomeLogin2,
+      TextTypeComponent.label => CustomTextStyle.label,
     };
   }
 }

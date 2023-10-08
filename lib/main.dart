@@ -1,6 +1,8 @@
 import 'package:asp/asp.dart';
+import 'package:emprego_aqui_app/data/curriculo/di/injection.dart';
 import 'package:emprego_aqui_app/data/user/di/injection.dart';
 import 'package:emprego_aqui_app/data/vagas/di/injection.dart';
+import 'package:emprego_aqui_app/domain/curriculo/di/injection.dart';
 import 'package:emprego_aqui_app/domain/user/di/injection.dart';
 import 'package:emprego_aqui_app/domain/vagas/di/injection.dart';
 import 'package:emprego_aqui_app/firebase_options.dart';
@@ -23,6 +25,8 @@ void main() async {
   VagaDomainInjection();
   UserInjector();
   UserDomainInjector();
+  CurriculoInjector();
+  CurriculoDomainInjector();
 
   runApp(const RxRoot(child: MyApp()));
 }

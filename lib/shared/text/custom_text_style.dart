@@ -13,6 +13,11 @@ class CustomTextStyle {
   );
 
   static const paragrafo2 = TextStyle(
+    fontSize: 14,
+    color: Color(0xff594F4F),
+  );
+
+  static const paragrafo3 = TextStyle(
     fontSize: 12,
     color: Color(0xff594F4F),
   );
@@ -30,6 +35,12 @@ class CustomTextStyle {
 
   static const nomeLogin2 = TextStyle(
     fontSize: 36,
+    color: Color(0xff594F4F),
+    fontWeight: FontWeight.bold,
+  );
+
+  static const label = TextStyle(
+    fontSize: 14,
     color: Color(0xff594F4F),
     fontWeight: FontWeight.bold,
   );

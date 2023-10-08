@@ -1,5 +1,10 @@
 import 'package:emprego_aqui_app/domain/vagas/entities/vaga_entity.dart';
 import 'package:emprego_aqui_app/feature/base/page/base_page.dart';
+import 'package:emprego_aqui_app/feature/curriculo/page/competencias_page.dart';
+import 'package:emprego_aqui_app/feature/curriculo/page/curriculo_page.dart';
+import 'package:emprego_aqui_app/feature/curriculo/page/dados_pessoais_page.dart';
+import 'package:emprego_aqui_app/feature/curriculo/page/experiencia_form_page.dart';
+import 'package:emprego_aqui_app/feature/curriculo/page/experiencias_page.dart';
 import 'package:emprego_aqui_app/feature/login/page/login_page.dart';
 import 'package:emprego_aqui_app/feature/vagas/page/vaga_datails_page.dart';
 import 'package:go_router/go_router.dart';
@@ -23,6 +28,30 @@ final routes = GoRouter(
               vaga: vaga,
             );
           },
+        ),
+        GoRoute(
+          path: 'curriculo',
+          builder: (context, state) => const CurriculoPage(),
+          routes: [
+            GoRoute(
+              path: 'dados-pessoais',
+              builder: (context, state) => const DadosPessoaisPage(),
+            ),
+            GoRoute(
+              path: 'competencias',
+              builder: (context, state) => const CompetenciasPage(),
+            ),
+            GoRoute(
+              path: 'experiencia',
+              builder: (context, state) => const ExperienciasPage(),
+              routes: [
+                GoRoute(
+                  path: 'experiencia-form',
+                  builder: (context, state) => ExperienciaFormPage(),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     ),

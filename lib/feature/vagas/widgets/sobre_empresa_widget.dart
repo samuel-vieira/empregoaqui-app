@@ -20,7 +20,7 @@ class SobreEmpresaWidget extends StatelessWidget {
         ),
         TextComponent(
           text: sobreEmpresa,
-          type: TextTypeComponent.paragrafo2,
+          type: TextTypeComponent.paragrafo3,
         ),
       ],
     );
