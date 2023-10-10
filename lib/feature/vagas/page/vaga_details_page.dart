@@ -1,4 +1,6 @@
+import 'package:emprego_aqui_app/domain/aplicacao/entity/aplicacao_entity.dart';
 import 'package:emprego_aqui_app/domain/vagas/entities/vaga_entity.dart';
+import 'package:emprego_aqui_app/feature/home/controllers/atoms/aplicacoes_atom.dart';
 import 'package:emprego_aqui_app/feature/vagas/widgets/requisitos_widget.dart';
 import 'package:emprego_aqui_app/feature/vagas/widgets/sobre_empresa_widget.dart';
 import 'package:emprego_aqui_app/feature/vagas/widgets/sobre_vaga_widget.dart';
@@ -9,9 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class VagaDetails extends StatelessWidget {
-  const VagaDetails({required this.vaga, super.key});
+  const VagaDetails({required this.vaga, this.isEditing = false, super.key});
 
   final Vaga vaga;
+  final bool isEditing;
 
   @override
   Widget build(BuildContext context) {
@@ -56,15 +59,37 @@ class VagaDetails extends StatelessWidget {
               height: 20,
             ),
             RequisitosWidget(requisitos: vaga.requisitos),
-            ElevatedButton(
-              onPressed: _aplicar,
-              child: const Text("Aplicar"),
-            ),
+            isEditing ? _buttonToRemoveAplicacao() : _buttonToAplicar()
           ],
         ),
       ),
     );
   }
 
-  _aplicar() {}
+  Widget _buttonToAplicar() {
+    return ElevatedButton(
+      onPressed: () => _aplicar(),
+      child: const Text("Aplicar"),
+    );
+  }
+
+  Widget _buttonToRemoveAplicacao() {
+    return ElevatedButton(
+      onPressed: () => _removerAplicacao(),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.red,
+      ),
+      child: const Text("Remover Aplicacao"),
+    );
+  }
+
+  _aplicar() {
+    novaAplicacao.value = Aplicacao(vagaNome: vaga.nome, id: vaga.id);
+    addAplicacaoState.call();
+  }
+
+  _removerAplicacao() {
+    aplicacaoToRemove.value = vaga.id;
+    removeAplicacaoState.call();
+  }
 }

@@ -6,7 +6,7 @@ import 'package:emprego_aqui_app/feature/curriculo/page/dados_pessoais_page.dart
 import 'package:emprego_aqui_app/feature/curriculo/page/experiencia_form_page.dart';
 import 'package:emprego_aqui_app/feature/curriculo/page/experiencias_page.dart';
 import 'package:emprego_aqui_app/feature/login/page/login_page.dart';
-import 'package:emprego_aqui_app/feature/vagas/page/vaga_datails_page.dart';
+import 'package:emprego_aqui_app/feature/vagas/page/vaga_details_page.dart';
 import 'package:go_router/go_router.dart';
 
 final routes = GoRouter(
@@ -23,9 +23,13 @@ final routes = GoRouter(
         GoRoute(
           path: 'vaga',
           builder: (context, state) {
-            Vaga vaga = state.extra as Vaga;
+            Map<String, dynamic> encodedExtra =
+                state.extra as Map<String, dynamic>;
+            Vaga vaga = encodedExtra['vaga'];
+            bool isEditing = encodedExtra['isEditing'];
             return VagaDetails(
               vaga: vaga,
+              isEditing: isEditing,
             );
           },
         ),
@@ -47,7 +51,7 @@ final routes = GoRouter(
               routes: [
                 GoRoute(
                   path: 'experiencia-form',
-                  builder: (context, state) => ExperienciaFormPage(),
+                  builder: (context, state) => const ExperienciaFormPage(),
                 ),
               ],
             ),

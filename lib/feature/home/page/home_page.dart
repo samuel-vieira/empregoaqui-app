@@ -1,11 +1,23 @@
+import 'package:emprego_aqui_app/feature/home/controllers/atoms/aplicacoes_atom.dart';
+import 'package:emprego_aqui_app/feature/home/widgets/aplicacoes_list_widget.dart';
 import 'package:emprego_aqui_app/feature/home/widgets/redirect_to_curriculo_widget.dart';
-import 'package:emprego_aqui_app/shared/card/card_component.dart';
 import 'package:emprego_aqui_app/shared/text/text_component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    fetchAplicacoesState.call();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +45,7 @@ class HomePage extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        const CardComponent(
-          type: CardType.homeCard,
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Nome da empresa'),
-                Text('Analista de Sistemas'),
-              ],
-            ),
-          ),
-        ),
+        const AplicacoesListWidget(),
         const SizedBox(
           height: 20,
         ),

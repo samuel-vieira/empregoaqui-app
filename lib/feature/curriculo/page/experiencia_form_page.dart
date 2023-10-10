@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:emprego_aqui_app/domain/curriculo/entities/experiencia_entity.dart';
 import 'package:emprego_aqui_app/feature/curriculo/controllers/atom/curriculo_atom.dart';
 import 'package:emprego_aqui_app/shared/app_bar_component/app_bar_component.dart';
@@ -7,9 +5,14 @@ import 'package:emprego_aqui_app/shared/text/text_component.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ExperienciaFormPage extends StatelessWidget {
-  ExperienciaFormPage({super.key});
+class ExperienciaFormPage extends StatefulWidget {
+  const ExperienciaFormPage({super.key});
 
+  @override
+  State<ExperienciaFormPage> createState() => _ExperienciaFormPageState();
+}
+
+class _ExperienciaFormPageState extends State<ExperienciaFormPage> {
   final _meses = [
     'JAN',
     'FEV',
@@ -83,12 +86,17 @@ class ExperienciaFormPage extends StatelessWidget {
   ];
 
   String dropMesInicioValue = 'JAN';
+
   String dropAnoInicioValue = '2000';
+
   String dropMesFimValue = 'JAN';
+
   String dropAnoFimValue = '2000';
 
   final cargoController = TextEditingController();
+
   final empresaController = TextEditingController();
+
   final descricaoController = TextEditingController();
 
   @override

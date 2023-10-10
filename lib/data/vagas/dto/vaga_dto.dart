@@ -7,6 +7,7 @@ class VagaDTO {
   final String modeloTrabalho;
   final String salario;
   final String tipoDeContrato;
+  final String id;
 
   VagaDTO({
     required this.nome,
@@ -17,6 +18,7 @@ class VagaDTO {
     this.modeloTrabalho = '',
     this.salario = '',
     this.tipoDeContrato = '',
+    this.id = '',
   });
 
   factory VagaDTO.fromFirestore(dynamic json) {
@@ -31,6 +33,7 @@ class VagaDTO {
       modeloTrabalho: json['modeloTrabalho'],
       salario: json['salario'],
       tipoDeContrato: json['tipoDeContrato'],
+      id: json['id'],
     );
   }
 
@@ -44,11 +47,12 @@ class VagaDTO {
       'modeloTrabalho': vaga.modeloTrabalho,
       'salario': vaga.salario,
       'tipoDeContrato': vaga.tipoDeContrato,
+      'id': vaga.tipoDeContrato,
     };
   }
 
   @override
   String toString() {
-    return "nome: $nome, nomeEmpresa: $nomeEmpresa, sobreEmpresa: $sobreEmpresa, sobreVaga: $sobreVaga, requisitos: $requistos, modeloTrabalho: $modeloTrabalho, salario: $salario, tipoDeContrato: $tipoDeContrato";
+    return "nome: $nome, nomeEmpresa: $nomeEmpresa, sobreEmpresa: $sobreEmpresa, sobreVaga: $sobreVaga, requisitos: $requistos, modeloTrabalho: $modeloTrabalho, salario: $salario, tipoDeContrato: $tipoDeContrato, id: $id";
   }
 }

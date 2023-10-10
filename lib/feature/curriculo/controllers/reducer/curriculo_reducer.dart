@@ -1,5 +1,4 @@
 import 'package:asp/asp.dart';
-import 'package:emprego_aqui_app/domain/curriculo/entities/experiencia_entity.dart';
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/add_competencias_use_case.dart';
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/add_experiencia_use_case.dart';
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/get_competencias_use_case.dart';

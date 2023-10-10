@@ -13,6 +13,7 @@ class VagaMapper {
       sobreVaga: vagaDto.sobreVaga,
       sobreEmpresa: vagaDto.sobreEmpresa,
       requisitos: vagaDto.requistos,
+      id: vagaDto.id,
     );
   }
 }

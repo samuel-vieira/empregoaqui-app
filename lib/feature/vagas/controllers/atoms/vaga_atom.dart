@@ -5,6 +5,7 @@ import 'package:emprego_aqui_app/domain/vagas/entities/vaga_entity.dart';
 final vagasAtom = <Vaga>[].asAtom();
 final vagaLoading = Atom<bool>(false);
 final vagaFieldTextState = Atom<String>('');
+final vagaIdToFind = Atom<String>('');
 
 //computed
 List<Vaga> get filteredVagas {
@@ -17,6 +18,10 @@ List<Vaga> get filteredVagas {
           .toLowerCase()
           .contains(vagaFieldTextState.value.toLowerCase()))
       .toList();
+}
+
+Vaga get filteredVaga {
+  return vagasAtom.where((vaga) => vaga.id == vagaIdToFind.value).first;
 }
 
 // actions

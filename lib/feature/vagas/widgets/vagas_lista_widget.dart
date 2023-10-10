@@ -34,7 +34,13 @@ class _VagasListaWidgetState extends State<VagasListaWidget> {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
-          onTap: () => context.go('/vaga', extra: vagas[index]),
+          onTap: () => context.go(
+            '/vaga',
+            extra: {
+              'vaga': vagas[index],
+              'isEditing': false,
+            },
+          ),
           child: CardComponent(
             type: CardType.vagaCard,
             child: Padding(

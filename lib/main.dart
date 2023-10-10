@@ -1,7 +1,9 @@
 import 'package:asp/asp.dart';
+import 'package:emprego_aqui_app/data/aplicacao/di/injection.dart';
 import 'package:emprego_aqui_app/data/curriculo/di/injection.dart';
 import 'package:emprego_aqui_app/data/user/di/injection.dart';
 import 'package:emprego_aqui_app/data/vagas/di/injection.dart';
+import 'package:emprego_aqui_app/domain/aplicacao/di/injection.dart';
 import 'package:emprego_aqui_app/domain/curriculo/di/injection.dart';
 import 'package:emprego_aqui_app/domain/user/di/injection.dart';
 import 'package:emprego_aqui_app/domain/vagas/di/injection.dart';
@@ -27,6 +29,8 @@ void main() async {
   UserDomainInjector();
   CurriculoInjector();
   CurriculoDomainInjector();
+  AplicacaoInjector();
+  AplicacaoDomainInjector();
 
   runApp(const RxRoot(child: MyApp()));
 }
