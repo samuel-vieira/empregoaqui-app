@@ -10,6 +10,7 @@ enum TextTypeComponent {
   nomeLogin1,
   nomeLogin2,
   label,
+  statusText,
 }
 
 class TextComponent extends StatelessWidget {
@@ -40,6 +41,7 @@ class TextComponent extends StatelessWidget {
       TextTypeComponent.nomeLogin1 => CustomTextStyle.nomeLogin1,
       TextTypeComponent.nomeLogin2 => CustomTextStyle.nomeLogin2,
       TextTypeComponent.label => CustomTextStyle.label,
+      TextTypeComponent.statusText => CustomTextStyle.statusText,
     };
   }
 }

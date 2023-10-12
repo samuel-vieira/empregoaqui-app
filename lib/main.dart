@@ -7,6 +7,7 @@ import 'package:emprego_aqui_app/domain/aplicacao/di/injection.dart';
 import 'package:emprego_aqui_app/domain/curriculo/di/injection.dart';
 import 'package:emprego_aqui_app/domain/user/di/injection.dart';
 import 'package:emprego_aqui_app/domain/vagas/di/injection.dart';
+import 'package:emprego_aqui_app/feature/home/controllers/reducers/home_reducer.dart';
 import 'package:emprego_aqui_app/firebase_options.dart';
 import 'package:emprego_aqui_app/services/db/firebase_injector.dart';
 import 'package:emprego_aqui_app/shared/routes/routes.dart';
@@ -31,6 +32,7 @@ void main() async {
   CurriculoDomainInjector();
   AplicacaoInjector();
   AplicacaoDomainInjector();
+  HomeReducer();
 
   runApp(const RxRoot(child: MyApp()));
 }

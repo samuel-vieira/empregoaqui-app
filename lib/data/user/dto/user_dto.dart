@@ -1,14 +1,28 @@
 class UserDTO {
-  final String user;
-  final String password;
+  final String userName;
+  final String email;
+  final String telefone;
 
   UserDTO({
-    required this.user,
-    required this.password,
+    required this.userName,
+    required this.email,
+    required this.telefone,
   });
 
   @override
   String toString() {
-    return 'user: $user, password: $password';
+    return 'user: $userName, password: $email';
+  }
+
+  factory UserDTO.fromFirestore(dynamic json) {
+    return UserDTO(
+      userName: json['nome'],
+      email: json['email'],
+      telefone: json['telefone'],
+    );
+  }
+
+  Map<String, Object> toFirestore() {
+    return {};
   }
 }

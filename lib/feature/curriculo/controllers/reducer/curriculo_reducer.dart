@@ -110,7 +110,7 @@ class CurriculoReducer extends Reducer {
     var response = await addExperienciaUseCase.call(novaExperienciaAtom.value);
 
     response.either(
-      (left) => debugPrint('teste'),
+      (left) => debugPrint(left.toString()),
       (right) {
         fetchExperienciasState.call();
       },
@@ -118,7 +118,6 @@ class CurriculoReducer extends Reducer {
   }
 
   _removeExperiencia() async {
-    debugPrint('Delete chamado');
     var response =
         await removeExperienciaUseCase.call(experienciaNomeAtom.value);
 

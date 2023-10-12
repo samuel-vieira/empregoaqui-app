@@ -1,31 +1,38 @@
 import 'package:asp/asp.dart';
-import 'package:either_dart/either.dart';
-import 'package:emprego_aqui_app/domain/user/entities/user_entity.dart';
-import 'package:emprego_aqui_app/domain/user/use_cases/signin_usecase.dart';
+import 'package:emprego_aqui_app/domain/user/use_cases/get_user_use_case.dart';
+import 'package:emprego_aqui_app/domain/user/use_cases/update_user_use_case.dart';
 import 'package:emprego_aqui_app/feature/login/controllers/atoms/user_atom.dart';
+import 'package:flutter/material.dart';
 
 class UserReducer extends Reducer {
-  UserReducer({required this.signInUseCase}) {
-    on(() => [signInAction.value], _signIn);
+  UserReducer({
+    required this.getUserUseCase,
+    required this.updateUserUseCase,
+  }) {
+    on(() => [fetchUserInfoState], _fetchUserInfo);
+    on(() => [updateUserInfoState], _updateUserInfo);
   }
 
-  final SignInUseCase signInUseCase;
+  final GetUserUseCase getUserUseCase;
+  final UpdateUserUseCase updateUserUseCase;
 
-  _signIn() {
-    if (username.value.isEmpty || password.value.isEmpty) {
-      return;
-    }
+  _fetchUserInfo() async {
+    final response = await getUserUseCase.call();
 
-    UserEntity user = UserEntity(
-      user: username.value,
-      password: password.value,
+    response.either(
+      (left) => debugPrint(left.toString()),
+      (right) {
+        userInfoAtom.value = right;
+      },
     );
+  }
 
-    final result = signInUseCase.call(user);
+  _updateUserInfo() async {
+    final response = await updateUserUseCase.call(userDataToUpdate.value);
 
-    result.either(
-      (left) => false,
-      (right) => true,
+    response.either(
+      (left) => debugPrint(left.toString()),
+      (right) => fetchUserInfoState.call(),
     );
   }
 }

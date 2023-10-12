@@ -1,5 +1,6 @@
 import 'package:asp/asp.dart';
 import 'package:emprego_aqui_app/feature/curriculo/controllers/atom/user_atom.dart';
+import 'package:emprego_aqui_app/feature/login/controllers/atoms/user_atom.dart';
 import 'package:emprego_aqui_app/shared/text/text_component.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select(() => userAtom.value);
+    final user = context.select(() => userInfoAtom.value);
 
     return Column(
       children: [
@@ -29,7 +30,7 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
               text: 'Nome: ',
               type: TextTypeComponent.label,
             ),
-            _dadosPessoaisText(user.nome ?? ''),
+            _dadosPessoaisText(user.username),
           ],
         ),
         const SizedBox(
@@ -41,7 +42,7 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
               text: 'Email: ',
               type: TextTypeComponent.label,
             ),
-            _dadosPessoaisText(user.email ?? ''),
+            _dadosPessoaisText(user.email),
           ],
         ),
         const SizedBox(
@@ -53,7 +54,7 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
               text: 'Telefone: ',
               type: TextTypeComponent.label,
             ),
-            _dadosPessoaisText('(99) 99999-9999'),
+            _dadosPessoaisText(user.telefone),
           ],
         ),
       ],

@@ -24,4 +24,17 @@ class VagasRepositoryImpl implements VagasRepository {
 
     return vagas;
   }
+
+  @override
+  Future<Vaga> fetchVaga(String id) async {
+    try {
+      VagaDTO vagaDTO = await vagaDataSource.fetchVaga(id);
+
+      Vaga vaga = mapper.mapDTOtoEntity(vagaDTO);
+
+      return vaga;
+    } catch (_) {
+      rethrow;
+    }
+  }
 }

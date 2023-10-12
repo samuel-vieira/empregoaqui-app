@@ -257,8 +257,6 @@ class _ExperienciaFormPageState extends State<ExperienciaFormPage> {
       dataFim: '$dropMesFimValue/$dropAnoFimValue',
     );
 
-    debugPrint(novaExperienciaAtom.value.toString());
-
     addExperienciasState.call();
   }
 }

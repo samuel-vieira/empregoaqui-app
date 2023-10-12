@@ -44,4 +44,9 @@ class CustomTextStyle {
     color: Color(0xff594F4F),
     fontWeight: FontWeight.bold,
   );
+
+  static const statusText = TextStyle(
+    fontSize: 14,
+    color: Colors.white,
+  );
 }

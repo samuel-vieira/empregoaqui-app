@@ -16,12 +16,6 @@ class VagasListaWidget extends StatefulWidget {
 
 class _VagasListaWidgetState extends State<VagasListaWidget> {
   @override
-  void initState() {
-    super.initState();
-    fetchVagasState.call();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final vagas = context.select(() => filteredVagas);
 

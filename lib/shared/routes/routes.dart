@@ -5,6 +5,7 @@ import 'package:emprego_aqui_app/feature/curriculo/page/curriculo_page.dart';
 import 'package:emprego_aqui_app/feature/curriculo/page/dados_pessoais_page.dart';
 import 'package:emprego_aqui_app/feature/curriculo/page/experiencia_form_page.dart';
 import 'package:emprego_aqui_app/feature/curriculo/page/experiencias_page.dart';
+import 'package:emprego_aqui_app/feature/home/page/aplicacoes_page.dart';
 import 'package:emprego_aqui_app/feature/login/page/login_page.dart';
 import 'package:emprego_aqui_app/feature/vagas/page/vaga_details_page.dart';
 import 'package:go_router/go_router.dart';
@@ -14,12 +15,16 @@ final routes = GoRouter(
   routes: [
     GoRoute(
       path: '/login',
-      builder: (context, state) => LoginPage(),
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: '/',
       builder: (context, state) => const BasePage(),
       routes: [
+        GoRoute(
+          path: 'aplicacoes',
+          builder: (context, state) => const AplicacoesPage(),
+        ),
         GoRoute(
           path: 'vaga',
           builder: (context, state) {

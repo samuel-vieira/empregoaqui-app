@@ -6,6 +6,21 @@ final vagasAtom = <Vaga>[].asAtom();
 final vagaLoading = Atom<bool>(false);
 final vagaFieldTextState = Atom<String>('');
 final vagaIdToFind = Atom<String>('');
+final vagaIdToGet = Atom<String>('');
+final vagaAtom = Atom<Vaga>(
+  Vaga(
+    nome: '',
+    principalTecnologia: '',
+    modeloDeTrabalho: '',
+    nomeEmpresa: '',
+    tipoDeContrato: '',
+    salario: '',
+    sobreVaga: '',
+    sobreEmpresa: '',
+    requisitos: [],
+    id: '',
+  ),
+);
 
 //computed
 List<Vaga> get filteredVagas {
@@ -20,9 +35,10 @@ List<Vaga> get filteredVagas {
       .toList();
 }
 
-Vaga get filteredVaga {
+Vaga? get filteredVaga {
   return vagasAtom.where((vaga) => vaga.id == vagaIdToFind.value).first;
 }
 
 // actions
 final fetchVagasState = Atom.action();
+final fetchVagaState = Atom.action();

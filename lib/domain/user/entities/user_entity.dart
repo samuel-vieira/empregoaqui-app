@@ -1,14 +1,16 @@
 class UserEntity {
-  final String user;
-  final String password;
+  final String username;
+  final String email;
+  final String telefone;
 
   UserEntity({
-    required this.user,
-    required this.password,
+    required this.username,
+    required this.email,
+    required this.telefone,
   });
 
   @override
   String toString() {
-    return 'user: $user, password: $password';
+    return 'user: $username, password: $email';
   }
 }

@@ -6,4 +6,6 @@ abstract class VagasRepository {
   factory VagasRepository() => getIt<VagasRepositoryImpl>();
 
   Future<List<Vaga>> fetchVagas();
+
+  Future<Vaga> fetchVaga(String id);
 }

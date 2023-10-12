@@ -31,6 +31,9 @@ class FirebaseService {
         toFirestore: (aplicacoesDTO, _) => aplicacoesDTO.toFirestore(),
       );
 
+  DocumentReference get userRef =>
+      db.collection("users").doc(FirebaseAuth.instance.currentUser!.uid);
+
   FirebaseAuth get auth => FirebaseAuth.instance;
   Stream<User?> get authState => auth.authStateChanges();
 }

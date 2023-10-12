@@ -1,16 +1,24 @@
+import 'package:emprego_aqui_app/feature/home/controllers/atoms/home_atom.dart';
 import 'package:emprego_aqui_app/feature/login/controllers/atoms/user_atom.dart';
 import 'package:emprego_aqui_app/feature/login/widgets/nome_widget.dart';
 import 'package:emprego_aqui_app/main.dart';
 import 'package:emprego_aqui_app/services/db/firebase_service.dart';
 import 'package:emprego_aqui_app/shared/text/text_component.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController =
       TextEditingController(text: 'empregoaqui@admin.com');
+
   final TextEditingController passwordController =
       TextEditingController(text: 'eaadmin');
 
@@ -50,7 +58,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           onChanged: (_) =>
-                              username.value = emailController.value.text,
+                              email.value = emailController.value.text,
                         ),
                         const SizedBox(
                           height: 20,
@@ -83,16 +91,17 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            onPressed: () => _login(context),
+                            onPressed: () {
+                              _login(context).then((_) {
+                                fetchSetupDataState.call();
+                                context.go('/');
+                              });
+                            },
                             child: const Text('Login'),
                           ),
                         ),
                         const SizedBox(
                           height: 30,
-                        ),
-                        ElevatedButton(
-                          onPressed: _logout,
-                          child: const Text('Logout'),
                         ),
                         const TextComponent(
                           text: 'Version 1.0.0',
@@ -110,21 +119,27 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _login(BuildContext context) {
+  Future _login(BuildContext context) async {
     try {
-      signInAction.call();
-      getIt<FirebaseService>().authState.listen((userAuth) {
-        if (userAuth != null) {
-          context.go('/');
-          user.value = getIt<FirebaseService>().auth.currentUser;
-        }
-      });
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
+      await getIt<FirebaseService>().auth.signInWithEmailAndPassword(
+            email: emailController.value.text,
+            password: passwordController.value.text,
+          );
+    } on FirebaseAuthException catch (e) {
+      final message = e.code == 'INVALID_LOGIN_CREDENTIALS'
+          ? "Login ou senha incorretos"
+          : "Erro ao logar. Tente novamente mais tarde";
 
-  _logout() {
-    getIt<FirebaseService>().auth.signOut();
+      final snackBar = SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      );
+
+      debugPrint("code: ${e.code}");
+      debugPrint("message: ${e.message}");
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      throw Exception(e.code);
+    }
   }
 }

@@ -12,7 +12,7 @@ class RemoveAplicacaoUseCase {
 
       return const Right(true);
     } catch (error) {
-      return Left(Exception('Erro ao remover aplicacao'));
+      return Left(Exception('Erro ao remover aplicacao: $error'));
     }
   }
 }

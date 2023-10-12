@@ -24,6 +24,19 @@ class VagasDataSource {
     }
   }
 
+  Future<VagaDTO> fetchVaga(String id) async {
+    try {
+      final encodedVaga = await firebaseService.vagasRef.doc(id).get();
+
+      final vagaDTO = VagaDTO.fromFirestore(encodedVaga.data());
+
+      return vagaDTO;
+    } catch (error) {
+      debugPrint(error.toString());
+      rethrow;
+    }
+  }
+
   Future createVaga() async {
     try {
       final vaga = VagaDTO(

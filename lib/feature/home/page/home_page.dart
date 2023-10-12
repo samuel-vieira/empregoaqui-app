@@ -1,9 +1,13 @@
-import 'package:emprego_aqui_app/feature/home/controllers/atoms/aplicacoes_atom.dart';
+import 'package:asp/asp.dart';
+import 'package:emprego_aqui_app/domain/user/entities/user_entity.dart';
 import 'package:emprego_aqui_app/feature/home/widgets/aplicacoes_list_widget.dart';
 import 'package:emprego_aqui_app/feature/home/widgets/redirect_to_curriculo_widget.dart';
+import 'package:emprego_aqui_app/feature/login/controllers/atoms/user_atom.dart';
+import 'package:emprego_aqui_app/main.dart';
+import 'package:emprego_aqui_app/services/db/firebase_service.dart';
 import 'package:emprego_aqui_app/shared/text/text_component.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,30 +20,47 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    fetchAplicacoesState.call();
   }
 
   @override
   Widget build(BuildContext context) {
+    final UserEntity user = context.select(() => userInfoAtom.value);
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextComponent(
-              text: FirebaseAuth.instance.currentUser!.displayName ??
-                  FirebaseAuth.instance.currentUser!.email!,
-              type: TextTypeComponent.paragrafo1,
+              text: user.username,
+              type: TextTypeComponent.titulo,
+            ),
+            IconButton(
+              onPressed: () {
+                getIt<FirebaseService>().auth.signOut();
+                context.go('/login');
+              },
+              icon: const Icon(Icons.exit_to_app),
             ),
           ],
         ),
         const SizedBox(
           height: 20,
         ),
-        const Align(
+        Align(
           alignment: Alignment.centerLeft,
-          child: TextComponent(
-            text: 'Últimas Aplicações',
-            type: TextTypeComponent.tituloCard,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const TextComponent(
+                text: 'Últimas Aplicações',
+                type: TextTypeComponent.tituloCard,
+              ),
+              IconButton(
+                onPressed: () => context.go('/aplicacoes'),
+                icon: const Icon(Icons.edit),
+              ),
+            ],
           ),
         ),
         const SizedBox(
