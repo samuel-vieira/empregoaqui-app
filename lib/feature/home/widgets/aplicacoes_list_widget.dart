@@ -15,23 +15,39 @@ class AplicacoesListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loading = context.select(() => aplicacaoLoading.value);
-    return loading
-        ? const Center(child: CircularProgressIndicator())
-        : _aplicacoesList(context);
+    return RxBuilder(builder: (_) {
+      return aplicacaoLoading.value
+          ? const Center(child: CircularProgressIndicator())
+          : aplicacoesAtom.value.isNotEmpty
+              ? _aplicacoesList(context)
+              : const ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.folder_off),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      TextComponent(
+                        text: 'Sem aplicações',
+                        type: TextTypeComponent.paragrafo2,
+                      ),
+                    ],
+                  ),
+                );
+    });
   }
 
   Widget _aplicacoesList(BuildContext context) {
-    final aplicacoes = context.select(() => aplicacoesAtom.value);
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         ListView.builder(
-          itemCount:
-              !isEditing && aplicacoes.length > 3 ? 3 : aplicacoes.length,
+          itemCount: !isEditing && aplicacoesAtom.value.length > 3
+              ? 3
+              : aplicacoesAtom.value.length,
           itemBuilder: (context, index) => AplicacaoItemWidget(
-            aplicacao: aplicacoes[index],
+            aplicacao: aplicacoesAtom.value[index],
             isEditing: isEditing,
           ),
           shrinkWrap: true,
@@ -44,7 +60,7 @@ class AplicacoesListWidget extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerRight,
             child: Offstage(
-              offstage: isEditing || aplicacoes.length <= 3,
+              offstage: isEditing || aplicacoesAtom.value.length <= 3,
               child: const TextComponent(
                 text: 'Ver todas',
                 type: TextTypeComponent.paragrafo2,

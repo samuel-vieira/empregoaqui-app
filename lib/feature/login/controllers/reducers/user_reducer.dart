@@ -9,8 +9,8 @@ class UserReducer extends Reducer {
     required this.getUserUseCase,
     required this.updateUserUseCase,
   }) {
-    on(() => [fetchUserInfoState], _fetchUserInfo);
-    on(() => [updateUserInfoState], _updateUserInfo);
+    on(() => [fetchUserInfoState.value], _fetchUserInfo);
+    on(() => [updateUserInfoState.value], _updateUserInfo);
   }
 
   final GetUserUseCase getUserUseCase;
@@ -20,7 +20,7 @@ class UserReducer extends Reducer {
     final response = await getUserUseCase.call();
 
     response.either(
-      (left) => debugPrint(left.toString()),
+      (left) => debugPrint("Erro ao buscar usuário ${left.toString()}"),
       (right) {
         userInfoAtom.value = right;
       },

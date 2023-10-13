@@ -1,5 +1,4 @@
 import 'package:asp/asp.dart';
-import 'package:emprego_aqui_app/domain/user/entities/user_entity.dart';
 import 'package:emprego_aqui_app/feature/home/widgets/aplicacoes_list_widget.dart';
 import 'package:emprego_aqui_app/feature/home/widgets/redirect_to_curriculo_widget.dart';
 import 'package:emprego_aqui_app/feature/login/controllers/atoms/user_atom.dart';
@@ -18,22 +17,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final UserEntity user = context.select(() => userInfoAtom.value);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TextComponent(
-              text: user.username,
-              type: TextTypeComponent.titulo,
+            RxBuilder(
+              builder: (_) => TextComponent(
+                text: userInfoAtom.value.username,
+                type: TextTypeComponent.titulo,
+              ),
             ),
             IconButton(
               onPressed: () {

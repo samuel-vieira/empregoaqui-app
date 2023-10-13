@@ -1,6 +1,7 @@
 import 'package:asp/asp.dart';
 import 'package:emprego_aqui_app/feature/curriculo/controllers/atom/curriculo_atom.dart';
 import 'package:emprego_aqui_app/feature/curriculo/widgets/competencia_item.dart';
+import 'package:emprego_aqui_app/shared/text/text_component.dart';
 import 'package:flutter/material.dart';
 
 class CompetenciasList extends StatelessWidget {
@@ -13,17 +14,33 @@ class CompetenciasList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final competencias = context.select(() => competenciasAtom.value);
-
-    return ListView.builder(
-      itemCount: competencias.length,
-      itemBuilder: (context, index) => CompetenciaItem(
-        competenciaNome: competencias[index].nome,
-        competenciaTempo: '${competencias[index].tempo} anos',
-        isEditing: isEditing,
-      ),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-    );
+    return RxBuilder(builder: (_) {
+      return competenciasAtom.value.isNotEmpty
+          ? ListView.builder(
+              itemCount: competenciasAtom.value.length,
+              itemBuilder: (context, index) => CompetenciaItem(
+                competenciaNome: competenciasAtom.value[index].nome,
+                competenciaTempo: '${competenciasAtom.value[index].tempo} anos',
+                isEditing: isEditing,
+              ),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+            )
+          : const ListTile(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.folder_off),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  TextComponent(
+                    text: 'Sem competências',
+                    type: TextTypeComponent.paragrafo2,
+                  ),
+                ],
+              ),
+            );
+    });
   }
 }

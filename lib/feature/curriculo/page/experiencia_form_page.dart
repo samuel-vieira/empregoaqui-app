@@ -102,6 +102,7 @@ class _ExperienciaFormPageState extends State<ExperienciaFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const AppBarComponent(title: 'Nova Experiencia'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
