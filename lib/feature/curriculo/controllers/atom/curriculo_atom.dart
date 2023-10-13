@@ -23,6 +23,8 @@ final novaExperienciaAtom = Atom<Experiencia>(
 );
 final experienciaToUpdate = Atom<Map<String, dynamic>>({});
 final errorOnAddExperiencia = Atom<bool>(false);
+final loadingExperiencia = Atom<bool>(false);
+final loadingCompetencia = Atom<bool>(false);
 
 // Actions
 final fetchCurriculoState = Atom.action();

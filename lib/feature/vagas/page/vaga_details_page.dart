@@ -17,92 +17,90 @@ class VagaDetails extends StatelessWidget {
   final Vaga vaga;
   final bool isEditing;
 
+  _snackBarSuccess(AplicacaoStatus status) {
+    return SnackBar(
+      content: TextComponent(
+        text: status == AplicacaoStatus.successOnSave
+            ? "Sucesso ao aplicar!"
+            : "Sucesso ao remover aplicação",
+        type: TextTypeComponent.statusText,
+      ),
+      backgroundColor: Colors.green,
+    );
+  }
+
+  _snackBarOnError(AplicacaoStatus status) {
+    return SnackBar(
+      content: TextComponent(
+        text: _chooseErrorText(status),
+        type: TextTypeComponent.statusText,
+      ),
+      backgroundColor: Colors.red,
+    );
+  }
+
+  _showSnackBar(AplicacaoStatus status, BuildContext context) {
+    final SnackBar snackBar;
+
+    switch (status) {
+      case AplicacaoStatus.successOnSave || AplicacaoStatus.successOnRemove:
+        snackBar = _snackBarSuccess(status);
+      case AplicacaoStatus.errorOnSave ||
+            AplicacaoStatus.aplicationAlreadyExists ||
+            AplicacaoStatus.errorOnRemove:
+        snackBar = _snackBarOnError(status);
+      case AplicacaoStatus.initial || AplicacaoStatus.loading:
+        return;
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
-    AplicacaoStatus status = context.select(
-      () => aplicacaoStatus.value,
-    );
-    return Scaffold(
-      appBar: AppBarComponent(
-        title: vaga.nome,
-        leading: InkWell(
-          onTap: () => context.pop(),
-          child: const Icon(
-            Icons.arrow_back_ios,
+    return RxCallback(
+      effects: [
+        rxObserver(
+          () => aplicacaoStatus.value,
+          effect: (status) {
+            _showSnackBar(status!, context);
+          },
+        )
+      ],
+      child: Scaffold(
+        appBar: AppBarComponent(
+          title: vaga.nome,
+          leading: InkWell(
+            onTap: () => context.pop(),
+            child: const Icon(
+              Icons.arrow_back_ios,
+            ),
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: ListView(
-          children: <Widget>[
-            Visibility(
-              visible: status == AplicacaoStatus.successOnSave ||
-                  status == AplicacaoStatus.successOnRemove,
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                decoration: const BoxDecoration(
-                    color: Color(0xFF008000),
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                height: 40,
-                width: double.maxFinite,
-                child: Center(
-                  child: TextComponent(
-                    text: status == AplicacaoStatus.successOnSave
-                        ? "Sucesso ao aplicar!"
-                        : "Sucesso ao remover aplicação",
-                    type: TextTypeComponent.statusText,
-                  ),
-                ),
+        body: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: ListView(
+            children: <Widget>[
+              VagaInfoWidget(
+                vaga: vaga,
               ),
-            ),
-            Visibility(
-              visible: status == AplicacaoStatus.errorOnSave ||
-                  status == AplicacaoStatus.aplicationAlreadyExists,
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                decoration: const BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                height: 40,
-                width: double.maxFinite,
-                child: Center(
-                  child: TextComponent(
-                    text: _chooseErrorText(status),
-                    type: TextTypeComponent.statusText,
-                  ),
-                ),
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: TextComponent(
-                text: vaga.nomeEmpresa,
-                type: TextTypeComponent.titulo,
+              SobreEmpresaWidget(
+                sobreEmpresa: vaga.sobreEmpresa,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            VagaInfoWidget(
-              vaga: vaga,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SobreEmpresaWidget(
-              sobreEmpresa: vaga.sobreEmpresa,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SobreVagaWidget(sobreVaga: vaga.sobreVaga),
-            const SizedBox(
-              height: 20,
-            ),
-            RequisitosWidget(requisitos: vaga.requisitos),
-            isEditing ? _buttonToRemoveAplicacao() : _buttonToAplicar(context)
-          ],
+              const SizedBox(
+                height: 10,
+              ),
+              SobreVagaWidget(sobreVaga: vaga.sobreVaga),
+              const SizedBox(
+                height: 20,
+              ),
+              RequisitosWidget(requisitos: vaga.requisitos),
+              isEditing ? _buttonToRemoveAplicacao() : _buttonToAplicar(context)
+            ],
+          ),
         ),
       ),
     );
@@ -144,6 +142,10 @@ class VagaDetails extends StatelessWidget {
   String _chooseErrorText(AplicacaoStatus status) {
     if (status == AplicacaoStatus.errorOnSave) {
       return "Erro ao aplicar. Tente novamente mais tarde";
+    }
+
+    if (status == AplicacaoStatus.errorOnRemove) {
+      return "Erro ao remover aplicação";
     }
 
     return "Você já aplicou nesta vaga";

@@ -21,19 +21,21 @@ class ExperienciaFormWidget extends StatefulWidget {
 class _ExperienciaFormWidgetState extends State<ExperienciaFormWidget> {
   final GlobalKey<FormState> key = GlobalKey();
 
+  final DateTime data = DateTime.now();
+
   final _meses = [
-    'JAN',
-    'FEV',
-    'MAR',
-    'ABR',
-    'MAI',
-    'JUN',
-    'JUL',
-    'AGO',
-    'SET',
-    'OUT',
-    'NOV',
-    'DEZ',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
   ];
 
   final _anos = [
@@ -93,11 +95,11 @@ class _ExperienciaFormWidgetState extends State<ExperienciaFormWidget> {
     '2023',
   ];
 
-  String dropMesInicioValue = 'JAN';
+  String dropMesInicioValue = '01';
 
   String dropAnoInicioValue = '2000';
 
-  String dropMesFimValue = 'JAN';
+  String dropMesFimValue = '01';
 
   String dropAnoFimValue = '2000';
 
@@ -229,6 +231,15 @@ class _ExperienciaFormWidgetState extends State<ExperienciaFormWidget> {
                           onChanged: (value) =>
                               dropMesFimValue = value.toString(),
                           value: dropMesFimValue,
+                          validator: (value) {
+                            if (value != null &&
+                                int.parse(value) > data.month &&
+                                int.parse(dropAnoFimValue) == data.year) {
+                              return 'Data inválida';
+                            }
+
+                            return null;
+                          },
                         ),
                       ),
                       const SizedBox(

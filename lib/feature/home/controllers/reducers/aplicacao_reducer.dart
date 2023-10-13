@@ -83,6 +83,7 @@ class AplicacaoReducer extends Reducer {
         debugPrint(left.toString());
       },
       (right) {
+        aplicacaoStatus.value = AplicacaoStatus.successOnRemove;
         fetchAplicacoesState.call();
         routes.pop();
       },

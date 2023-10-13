@@ -15,31 +15,38 @@ class CompetenciasList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RxBuilder(builder: (_) {
-      return competenciasAtom.value.isNotEmpty
-          ? ListView.builder(
-              itemCount: competenciasAtom.value.length,
-              itemBuilder: (context, index) => CompetenciaItem(
-                competenciaNome: competenciasAtom.value[index].nome,
-                isEditing: isEditing,
+      return loadingCompetencia.value
+          ? const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.0),
+              child: Center(
+                child: CircularProgressIndicator(),
               ),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
             )
-          : const ListTile(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.folder_off),
-                  SizedBox(
-                    width: 10,
+          : competenciasAtom.value.isNotEmpty
+              ? ListView.builder(
+                  itemCount: competenciasAtom.value.length,
+                  itemBuilder: (context, index) => CompetenciaItem(
+                    competenciaNome: competenciasAtom.value[index].nome,
+                    isEditing: isEditing,
                   ),
-                  TextComponent(
-                    text: 'Sem competências',
-                    type: TextTypeComponent.paragrafo2,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                )
+              : const ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.folder_off),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      TextComponent(
+                        text: 'Sem competências',
+                        type: TextTypeComponent.paragrafo2,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
+                );
     });
   }
 }

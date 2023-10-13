@@ -7,10 +7,12 @@ import 'package:emprego_aqui_app/domain/aplicacao/di/injection.dart';
 import 'package:emprego_aqui_app/domain/curriculo/di/injection.dart';
 import 'package:emprego_aqui_app/domain/user/di/injection.dart';
 import 'package:emprego_aqui_app/domain/vagas/di/injection.dart';
+import 'package:emprego_aqui_app/feature/home/controllers/atoms/home_atom.dart';
 import 'package:emprego_aqui_app/feature/home/controllers/reducers/home_reducer.dart';
 import 'package:emprego_aqui_app/firebase_options.dart';
 import 'package:emprego_aqui_app/services/db/firebase_injector.dart';
 import 'package:emprego_aqui_app/shared/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +38,13 @@ void main() async {
   HomeReducer();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  FirebaseAuth.instance.authStateChanges().listen((user) {
+    if (user != null) {
+      routes.go('/');
+      fetchSetupDataState.call();
+    }
+  });
 
   runApp(const RxRoot(child: MyApp()));
 }

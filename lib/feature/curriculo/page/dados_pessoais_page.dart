@@ -49,70 +49,78 @@ class _DadosPessoaisPageState extends State<DadosPessoaisPage> {
                   telefoneInput(),
                 ],
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (!key.currentState!.validate()) {
-                    return;
-                  }
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: SizedBox(
+                  width: double.maxFinite,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (!key.currentState!.validate()) {
+                        return;
+                      }
 
-                  Map<String, dynamic> map = {};
+                      Map<String, dynamic> map = {};
 
-                  if (nomeController.value.text.isNotEmpty &&
-                      nomeController.value.text != user.username) {
-                    map.addAll({'nome': nomeController.value.text});
-                  }
+                      if (nomeController.value.text.isNotEmpty &&
+                          nomeController.value.text != user.username) {
+                        map.addAll({'nome': nomeController.value.text});
+                      }
 
-                  if (emailController.value.text.isNotEmpty &&
-                      emailController.value.text != user.email) {
-                    map.addAll({'email': emailController.value.text});
-                  }
+                      if (emailController.value.text.isNotEmpty &&
+                          emailController.value.text != user.email) {
+                        map.addAll({'email': emailController.value.text});
+                      }
 
-                  if (telefoneController.value.text.isNotEmpty &&
-                      telefoneController.value.text != user.telefone) {
-                    map.addAll({'telefone': telefoneController.value.text});
-                  }
+                      if (telefoneController.value.text.isNotEmpty &&
+                          telefoneController.value.text != user.telefone) {
+                        map.addAll({'telefone': telefoneController.value.text});
+                      }
 
-                  if (map.isNotEmpty) {
-                    userDataToUpdate.value = map;
-                    _updateUser().then((value) {
-                      const snackBar = SnackBar(
-                        content: Text(
-                          "Dado alterado com sucesso!",
-                        ),
-                      );
+                      if (map.isNotEmpty) {
+                        userDataToUpdate.value = map;
+                        _updateUser().then((value) {
+                          const snackBar = SnackBar(
+                            content: Text(
+                              "Dado alterado com sucesso!",
+                            ),
+                            backgroundColor: Colors.green,
+                          );
 
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }).catchError((error) {
-                      const snackBar = SnackBar(
-                        content: Text(
-                          "Erro ao alterar dado",
-                        ),
-                        backgroundColor: Colors.red,
-                      );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }).catchError((error) {
+                          const snackBar = SnackBar(
+                            content: Text(
+                              "Erro ao alterar dado",
+                            ),
+                            backgroundColor: Colors.red,
+                          );
 
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    });
-                  } else {
-                    const snackBar = SnackBar(
-                      content: Column(
-                        children: [
-                          TextComponent(
-                            text: "Não houve mudança dos valores anteriores",
-                            type: TextTypeComponent.statusText,
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        });
+                      } else {
+                        const snackBar = SnackBar(
+                          content: Column(
+                            children: [
+                              TextComponent(
+                                text:
+                                    "Não houve mudança dos valores anteriores",
+                                type: TextTypeComponent.statusText,
+                              ),
+                              TextComponent(
+                                text: "Altere dados no formulário",
+                                type: TextTypeComponent.statusText,
+                              ),
+                            ],
                           ),
-                          TextComponent(
-                            text: "Altere dados no formulário",
-                            type: TextTypeComponent.statusText,
-                          ),
-                        ],
-                      ),
-                      backgroundColor: Colors.red,
-                    );
+                          backgroundColor: Colors.red,
+                        );
 
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                },
-                child: const Text("Salvar"),
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                    child: const Text("Salvar"),
+                  ),
+                ),
               ),
             ],
           ),

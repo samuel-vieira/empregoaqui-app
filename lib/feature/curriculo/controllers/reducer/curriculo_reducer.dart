@@ -51,6 +51,8 @@ class CurriculoReducer extends Reducer {
   }
 
   _fetchCompetencias() async {
+    loadingCompetencia.value = true;
+
     final response = await getCompetenciasUseCase.call();
 
     response.either(
@@ -63,6 +65,8 @@ class CurriculoReducer extends Reducer {
         }
       },
     );
+
+    loadingCompetencia.value = false;
   }
 
   _addCompetencia() async {
@@ -97,6 +101,7 @@ class CurriculoReducer extends Reducer {
   }
 
   _fetchExperiencias() async {
+    loadingExperiencia.value = true;
     final response = await getExperienciasUseCase.call();
 
     response.either(
@@ -109,6 +114,8 @@ class CurriculoReducer extends Reducer {
         }
       },
     );
+
+    loadingExperiencia.value = false;
   }
 
   _addExperiencia() async {
