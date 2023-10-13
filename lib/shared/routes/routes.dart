@@ -1,3 +1,4 @@
+import 'package:emprego_aqui_app/domain/curriculo/entities/experiencia_entity.dart';
 import 'package:emprego_aqui_app/domain/vagas/entities/vaga_entity.dart';
 import 'package:emprego_aqui_app/feature/base/page/base_page.dart';
 import 'package:emprego_aqui_app/feature/curriculo/page/competencias_page.dart';
@@ -56,7 +57,25 @@ final routes = GoRouter(
               routes: [
                 GoRoute(
                   path: 'experiencia-form',
-                  builder: (context, state) => const ExperienciaFormPage(),
+                  builder: (context, state) {
+                    if (state.extra != null) {
+                      Map<String, dynamic>? encodedExtra =
+                          state.extra as Map<String, dynamic>?;
+
+                      Experiencia? experiencia =
+                          encodedExtra?['experiencia'] as Experiencia;
+                      dynamic isEditing = encodedExtra?['isEditing'] ?? false;
+
+                      return ExperienciaFormPage(
+                        experiencia: experiencia,
+                        isEditing: isEditing as bool,
+                      );
+                    } else {
+                      return const ExperienciaFormPage(
+                        isEditing: false,
+                      );
+                    }
+                  },
                 ),
               ],
             ),

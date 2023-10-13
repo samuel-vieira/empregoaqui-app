@@ -23,7 +23,9 @@ class ExperienciaList extends StatelessWidget {
                 isEditing: isEditing,
               ),
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: isEditing
+                  ? const BouncingScrollPhysics()
+                  : const NeverScrollableScrollPhysics(),
             )
           : const ListTile(
               title: Row(

@@ -1,6 +1,7 @@
 import 'package:asp/asp.dart';
 import 'package:emprego_aqui_app/feature/login/controllers/atoms/user_atom.dart';
 import 'package:emprego_aqui_app/shared/app_bar_component/app_bar_component.dart';
+import 'package:emprego_aqui_app/shared/text/text_component.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -95,11 +96,13 @@ class _DadosPessoaisPageState extends State<DadosPessoaisPage> {
                     const snackBar = SnackBar(
                       content: Column(
                         children: [
-                          Text(
-                            "Não houve mudança dos valores anteriores",
+                          TextComponent(
+                            text: "Não houve mudança dos valores anteriores",
+                            type: TextTypeComponent.statusText,
                           ),
-                          Text(
-                            "Altere dados no formulário",
+                          TextComponent(
+                            text: "Altere dados no formulário",
+                            type: TextTypeComponent.statusText,
                           ),
                         ],
                       ),

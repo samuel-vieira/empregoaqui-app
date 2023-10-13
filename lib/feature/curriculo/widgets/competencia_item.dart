@@ -6,13 +6,11 @@ import 'package:flutter/material.dart';
 class CompetenciaItem extends StatelessWidget {
   const CompetenciaItem({
     required this.competenciaNome,
-    required this.competenciaTempo,
     this.isEditing = false,
     super.key,
   });
 
   final String competenciaNome;
-  final String competenciaTempo;
   final bool isEditing;
 
   @override
@@ -28,26 +26,18 @@ class CompetenciaItem extends StatelessWidget {
               text: competenciaNome,
               type: TextTypeComponent.tituloCard,
             ),
-            Row(
-              children: [
-                TextComponent(
-                  text: competenciaTempo,
-                  type: TextTypeComponent.paragrafo2,
+            Visibility(
+              visible: isEditing,
+              child: IconButton(
+                onPressed: () {
+                  competenciaNomeAtom.value = competenciaNome;
+                  removeCompetenciaState.call();
+                },
+                icon: const Icon(
+                  Icons.close,
+                  color: Colors.red,
                 ),
-                Visibility(
-                  visible: isEditing,
-                  child: IconButton(
-                    onPressed: () {
-                      competenciaNomeAtom.value = competenciaNome;
-                      removeCompetenciaState.call();
-                    },
-                    icon: const Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),

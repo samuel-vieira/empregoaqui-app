@@ -10,7 +10,7 @@ final experienciasAtom = <Experiencia>[].asAtom();
 final curriculoLoadingState = Atom<bool>(false);
 final competenciaNomeAtom = Atom<String>('');
 final novaCompetencia = Atom<Competencia>(Competencia(nome: '', tempo: ''));
-final experienciaNomeAtom = Atom<String>('');
+final experienciaIdAtom = Atom<String>('');
 final novaExperienciaAtom = Atom<Experiencia>(
   Experiencia(
     empresa: '',
@@ -18,8 +18,11 @@ final novaExperienciaAtom = Atom<Experiencia>(
     cargo: '',
     dataInicio: '',
     dataFim: '',
+    id: '',
   ),
 );
+final experienciaToUpdate = Atom<Map<String, dynamic>>({});
+final errorOnAddExperiencia = Atom<bool>(false);
 
 // Actions
 final fetchCurriculoState = Atom.action();
@@ -29,3 +32,4 @@ final removeCompetenciaState = Atom.action();
 final fetchExperienciasState = Atom.action();
 final addExperienciasState = Atom.action();
 final removeExperienciasState = Atom.action();
+final updateExperienciaState = Atom.action();

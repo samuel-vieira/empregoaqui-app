@@ -4,6 +4,7 @@ class ExperienciaDTO {
   final String cargo;
   final String tempoInicio;
   final String tempoFim;
+  String id;
 
   ExperienciaDTO({
     required this.empresa,
@@ -11,6 +12,7 @@ class ExperienciaDTO {
     required this.cargo,
     required this.tempoInicio,
     required this.tempoFim,
+    required this.id,
   });
 
   ExperienciaDTO.fromFirestore(
@@ -21,6 +23,7 @@ class ExperienciaDTO {
           cargo: json['cargo']! as String,
           tempoInicio: json['tempoInicio']! as String,
           tempoFim: json['tempoFim']! as String,
+          id: json['id'] as String,
         );
 
   Map<String, Object?> toFirestore() {
@@ -30,6 +33,7 @@ class ExperienciaDTO {
       'cargo': cargo,
       'tempoInicio': tempoInicio,
       'tempoFim': tempoFim,
+      'id': id,
     };
   }
 }

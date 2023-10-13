@@ -107,9 +107,18 @@ class CurriculoRepositoryImpl implements CurriculoRepository {
   }
 
   @override
-  Future removeExperiencia(String experienciaNome) {
+  Future removeExperiencia(String id) {
     try {
-      return curriculoDataSource.deleteExperiencia(experienciaNome);
+      return curriculoDataSource.deleteExperiencia(id);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future updateExperiencia(String id, Map<String, dynamic> data) {
+    try {
+      return curriculoDataSource.updateExperiencia(id, data);
     } catch (error) {
       rethrow;
     }

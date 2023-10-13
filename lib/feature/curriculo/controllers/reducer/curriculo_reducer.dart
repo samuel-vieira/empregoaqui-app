@@ -6,7 +6,9 @@ import 'package:emprego_aqui_app/domain/curriculo/use_cases/get_curriculo_use_ca
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/get_experiencias_use_case.dart';
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/remove_competencia_use_case.dart';
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/remove_experiencia_use_case.dart';
+import 'package:emprego_aqui_app/domain/curriculo/use_cases/update_experiencia_use_case.dart';
 import 'package:emprego_aqui_app/feature/curriculo/controllers/atom/curriculo_atom.dart';
+import 'package:emprego_aqui_app/shared/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class CurriculoReducer extends Reducer {
@@ -17,6 +19,7 @@ class CurriculoReducer extends Reducer {
   final GetExperienciasUseCase getExperienciasUseCase;
   final AddExperienciaUseCase addExperienciaUseCase;
   final RemoveExperienciaUseCase removeExperienciaUseCase;
+  final UpdateExperienciaUseCase updateExperienciaUseCase;
 
   CurriculoReducer({
     required this.getCurriculoUseCase,
@@ -26,6 +29,7 @@ class CurriculoReducer extends Reducer {
     required this.getExperienciasUseCase,
     required this.addExperienciaUseCase,
     required this.removeExperienciaUseCase,
+    required this.updateExperienciaUseCase,
   }) {
     on(() => [fetchCurriculoState.value], _fetchCurriculo);
     on(() => [fetchCompetenciasState.value], _fetchCompetencias);
@@ -34,6 +38,7 @@ class CurriculoReducer extends Reducer {
     on(() => [fetchExperienciasState.value], _fetchExperiencias);
     on(() => [addExperienciasState.value], _addExperiencia);
     on(() => [removeExperienciasState.value], _removeExperiencia);
+    on(() => [updateExperienciaState.value], _updateExperiencia);
   }
 
   _fetchCurriculo() async {
@@ -113,17 +118,36 @@ class CurriculoReducer extends Reducer {
       (left) => debugPrint(left.toString()),
       (right) {
         fetchExperienciasState.call();
+        routes.pop();
       },
     );
   }
 
   _removeExperiencia() async {
-    var response =
-        await removeExperienciaUseCase.call(experienciaNomeAtom.value);
+    var response = await removeExperienciaUseCase.call(experienciaIdAtom.value);
 
     response.either(
       (left) => debugPrint(left.toString()),
       (right) => fetchExperienciasState.call(),
+    );
+  }
+
+  _updateExperiencia() async {
+    var response = await updateExperienciaUseCase.call(
+      experienciaToUpdate.value['id'],
+      experienciaToUpdate.value,
+    );
+
+    response.either(
+      (left) {
+        debugPrint(left.toString());
+        errorOnAddExperiencia.value = true;
+      },
+      (right) {
+        errorOnAddExperiencia.value = false;
+        fetchExperienciasState.call();
+        routes.pop();
+      },
     );
   }
 }

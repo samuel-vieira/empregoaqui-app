@@ -6,9 +6,9 @@ class RemoveExperienciaUseCase {
 
   final CurriculoRepository repository;
 
-  Future<Either<Exception, bool>> call(String experienciaNome) async {
+  Future<Either<Exception, bool>> call(String id) async {
     try {
-      await repository.removeExperiencia(experienciaNome);
+      await repository.removeExperiencia(id);
 
       return const Right(true);
     } catch (error) {

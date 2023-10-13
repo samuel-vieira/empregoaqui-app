@@ -19,5 +19,7 @@ abstract class CurriculoRepository {
 
   Future addExperiencia(Experiencia experiencia);
 
-  Future removeExperiencia(String experienciaNome);
+  Future removeExperiencia(String id);
+
+  Future updateExperiencia(String id, Map<String, dynamic> data);
 }

@@ -104,6 +104,9 @@ class _CurriculoPageState extends State<CurriculoPage> {
           height: 10,
         ),
         const CompetenciasList(),
+        const SizedBox(
+          height: 10,
+        ),
       ],
     );
   }

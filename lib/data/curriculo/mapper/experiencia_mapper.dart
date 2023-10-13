@@ -9,6 +9,7 @@ class ExperienciaMapper {
       dataInicio: experienciaDTO.tempoInicio,
       dataFim: experienciaDTO.tempoFim,
       cargo: experienciaDTO.cargo,
+      id: experienciaDTO.id,
     );
   }
 
@@ -19,6 +20,7 @@ class ExperienciaMapper {
       cargo: experiencia.cargo,
       tempoInicio: experiencia.dataInicio,
       tempoFim: experiencia.dataFim,
+      id: experiencia.id,
     );
   }
 }

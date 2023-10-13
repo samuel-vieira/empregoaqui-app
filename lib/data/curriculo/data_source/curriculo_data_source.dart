@@ -2,6 +2,7 @@ import 'package:emprego_aqui_app/data/curriculo/dto/competencia_dto.dart';
 import 'package:emprego_aqui_app/data/curriculo/dto/curriculo_dto.dart';
 import 'package:emprego_aqui_app/data/curriculo/dto/experiencia_dto.dart';
 import 'package:emprego_aqui_app/services/db/firebase_service.dart';
+import 'package:emprego_aqui_app/shared/generate_uuid.dart';
 import 'package:flutter/material.dart';
 
 class CurriculoDataSource {
@@ -108,8 +109,12 @@ class CurriculoDataSource {
 
   Future addExperiencia(ExperienciaDTO experienciaDTO) async {
     try {
+      final uuid = UniqueId().generateUuid();
+
+      experienciaDTO.id = uuid;
+
       firebaseService.experienciaRef
-          .doc(experienciaDTO.cargo)
+          .doc(uuid)
           .set(experienciaDTO)
           .onError((error, stackTrace) => debugPrint(error.toString()));
     } catch (error) {
@@ -118,13 +123,25 @@ class CurriculoDataSource {
     }
   }
 
-  Future deleteExperiencia(String experienciaNome) async {
+  Future deleteExperiencia(String id) async {
     try {
       firebaseService.experienciaRef
-          .doc(experienciaNome)
+          .doc(id)
           .delete()
           .onError((error, stackTrace) => debugPrint(error.toString()));
     } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future updateExperiencia(String id, Map<String, dynamic> data) async {
+    try {
+      firebaseService.experienciaRef
+          .doc(id)
+          .update(data)
+          .onError((error, stackTrace) => debugPrint(error.toString()));
+    } catch (error) {
+      debugPrint(error.toString());
       rethrow;
     }
   }

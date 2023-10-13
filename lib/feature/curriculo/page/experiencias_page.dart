@@ -11,7 +11,7 @@ class ExperienciasPage extends StatelessWidget {
     return Scaffold(
       appBar: const AppBarComponent(title: 'Experiência'),
       body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
         child: ExperienciaList(
           isEditing: true,
         ),

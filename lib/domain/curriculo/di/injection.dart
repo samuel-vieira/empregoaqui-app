@@ -6,6 +6,7 @@ import 'package:emprego_aqui_app/domain/curriculo/use_cases/get_curriculo_use_ca
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/get_experiencias_use_case.dart';
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/remove_competencia_use_case.dart';
 import 'package:emprego_aqui_app/domain/curriculo/use_cases/remove_experiencia_use_case.dart';
+import 'package:emprego_aqui_app/domain/curriculo/use_cases/update_experiencia_use_case.dart';
 import 'package:emprego_aqui_app/feature/curriculo/controllers/reducer/curriculo_reducer.dart';
 import 'package:emprego_aqui_app/feature/curriculo/controllers/reducer/user_reducer.dart';
 import 'package:emprego_aqui_app/main.dart';
@@ -53,6 +54,11 @@ class CurriculoDomainInjector {
       ),
     );
     getIt.registerSingleton(
+      UpdateExperienciaUseCase(
+        repository: getIt<CurriculoRepository>(),
+      ),
+    );
+    getIt.registerSingleton(
       CurriculoReducer(
         getCurriculoUseCase: getIt<GetCurriculoUseCase>(),
         addCompetenciasUseCase: getIt<AddCompetenciasUseCase>(),
@@ -61,6 +67,7 @@ class CurriculoDomainInjector {
         getExperienciasUseCase: getIt<GetExperienciasUseCase>(),
         addExperienciaUseCase: getIt<AddExperienciaUseCase>(),
         removeExperienciaUseCase: getIt<RemoveExperienciaUseCase>(),
+        updateExperienciaUseCase: getIt<UpdateExperienciaUseCase>(),
       ),
     );
     getIt.registerSingleton(UserReducer());

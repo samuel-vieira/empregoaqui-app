@@ -13,6 +13,7 @@ import 'package:emprego_aqui_app/services/db/firebase_injector.dart';
 import 'package:emprego_aqui_app/shared/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
@@ -33,6 +34,8 @@ void main() async {
   AplicacaoInjector();
   AplicacaoDomainInjector();
   HomeReducer();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(const RxRoot(child: MyApp()));
 }

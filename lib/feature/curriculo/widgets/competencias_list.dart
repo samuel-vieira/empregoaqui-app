@@ -20,7 +20,6 @@ class CompetenciasList extends StatelessWidget {
               itemCount: competenciasAtom.value.length,
               itemBuilder: (context, index) => CompetenciaItem(
                 competenciaNome: competenciasAtom.value[index].nome,
-                competenciaTempo: '${competenciasAtom.value[index].tempo} anos',
                 isEditing: isEditing,
               ),
               shrinkWrap: true,
