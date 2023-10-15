@@ -9,9 +9,13 @@ class ExperienciasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarComponent(title: 'Experiência'),
+      appBar: const AppBarComponent(title: 'Experiências'),
       body: const Padding(
-        padding: EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
+        padding: EdgeInsets.only(
+          bottom: 20.0,
+          left: 20.0,
+          right: 20.0,
+        ),
         child: ExperienciaList(
           isEditing: true,
         ),

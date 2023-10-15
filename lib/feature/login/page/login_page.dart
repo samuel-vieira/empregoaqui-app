@@ -16,11 +16,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController =
-      TextEditingController(text: 'empregoaqui@admin.com');
+  final TextEditingController emailController = TextEditingController();
 
-  final TextEditingController passwordController =
-      TextEditingController(text: 'eaadmin');
+  final TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -80,26 +79,30 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 50,
                         ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
+                        isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    _login(context).then((_) {
+                                      fetchSetupDataState.call();
+                                      context.go('/');
+                                    });
+                                  },
+                                  child: const Text('Login'),
                                 ),
                               ),
-                            ),
-                            onPressed: () {
-                              _login(context).then((_) {
-                                fetchSetupDataState.call();
-                                context.go('/');
-                              });
-                            },
-                            child: const Text('Login'),
-                          ),
-                        ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -121,6 +124,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Future _login(BuildContext context) async {
     try {
+      setState(() {
+        isLoading = true;
+      });
       await getIt<FirebaseService>().auth.signInWithEmailAndPassword(
             email: emailController.value.text,
             password: passwordController.value.text,
@@ -128,18 +134,19 @@ class _LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       final message = e.code == 'INVALID_LOGIN_CREDENTIALS'
           ? "Login ou senha incorretos"
-          : "Erro ao logar. Tente novamente mais tarde";
+          : "Erro no login";
 
       final snackBar = SnackBar(
         content: Text(message),
         backgroundColor: Colors.red,
       );
 
-      debugPrint("code: ${e.code}");
-      debugPrint("message: ${e.message}");
-
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       throw Exception(e.code);
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 }

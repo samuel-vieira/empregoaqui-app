@@ -81,6 +81,13 @@ class VagaDetails extends StatelessWidget {
           padding: const EdgeInsets.all(18.0),
           child: ListView(
             children: <Widget>[
+              TextComponent(
+                text: vaga.nomeEmpresa,
+                type: TextTypeComponent.tituloCard,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               VagaInfoWidget(
                 vaga: vaga,
               ),

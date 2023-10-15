@@ -13,10 +13,6 @@ class VagasPage extends StatelessWidget {
       itemBuilder: (context, index) {
         return const Column(
           children: [
-            /*ElevatedButton(
-              onPressed: () => getIt<VagasDataSource>().createVaga(),
-              child: const Text("Create vaga"),
-            ),*/
             VagasSearchBarWidget(),
             SizedBox(
               height: 20,

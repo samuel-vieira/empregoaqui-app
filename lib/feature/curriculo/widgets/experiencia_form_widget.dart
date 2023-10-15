@@ -125,7 +125,7 @@ class _ExperienciaFormWidgetState extends State<ExperienciaFormWidget> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: const AppBarComponent(title: 'Nova Experiencia'),
+      appBar: const AppBarComponent(title: 'Experiência'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
@@ -143,7 +143,7 @@ class _ExperienciaFormWidgetState extends State<ExperienciaFormWidget> {
                     decoration: decoration('Cargo'),
                     maxLength: 40,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return 'Campo não pode estar vazio';
                       }
 
@@ -158,7 +158,7 @@ class _ExperienciaFormWidgetState extends State<ExperienciaFormWidget> {
                     decoration: decoration('Empresa'),
                     maxLength: 40,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return 'Campo não pode estar vazio';
                       }
 
@@ -268,7 +268,7 @@ class _ExperienciaFormWidgetState extends State<ExperienciaFormWidget> {
                     decoration: decoration('Descrição'),
                     maxLength: 300,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return 'Campo não pode estar vazio';
                       }
 

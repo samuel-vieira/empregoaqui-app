@@ -1,5 +1,4 @@
 import 'package:asp/asp.dart';
-import 'package:either_dart/either.dart';
 import 'package:emprego_aqui_app/domain/aplicacao/use_cases/add_aplicacao_use_case.dart';
 import 'package:emprego_aqui_app/domain/aplicacao/use_cases/get_aplicacoes_use_case.dart';
 import 'package:emprego_aqui_app/domain/aplicacao/use_cases/remove_aplicacao_use_case.dart';
@@ -72,7 +71,8 @@ class AplicacaoReducer extends Reducer {
   }
 
   _removeAplicacao() async {
-    final response = removeAplicacaoUseCase.call(aplicacaoToRemove.value);
+    aplicacaoLoading.value = true;
+    final response = await removeAplicacaoUseCase.call(aplicacaoToRemove.value);
 
     response.either(
       (left) async {
@@ -83,10 +83,12 @@ class AplicacaoReducer extends Reducer {
         debugPrint(left.toString());
       },
       (right) {
-        aplicacaoStatus.value = AplicacaoStatus.successOnRemove;
         fetchAplicacoesState.call();
+        aplicacaoStatus.value = AplicacaoStatus.successOnRemove;
         routes.pop();
       },
     );
+
+    aplicacaoLoading.value = false;
   }
 }
